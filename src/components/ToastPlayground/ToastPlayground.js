@@ -2,7 +2,6 @@ import React from 'react';
 
 import Button from '../Button';
 import ToastShelf from '../ToastShelf';
-import ToastProvider from '../ToastProvider/ToastProvider';
 import { ToastContext } from '../ToastProvider/ToastProvider';
 
 import styles from './ToastPlayground.module.css';
@@ -11,7 +10,7 @@ const VARIANT_OPTIONS = ['notice', 'warning', 'success', 'error'];
 
 function ToastPlayground() {
   const { createToast } = React.useContext(ToastContext)
-  const [variant, setVariant] = React.useState("notice")
+  const [variant, setVariant] = React.useState(VARIANT_OPTIONS[0])
   const [message, setMessage] = React.useState("")
 
   return (
@@ -27,7 +26,7 @@ function ToastPlayground() {
           event.preventDefault()
           createToast(message, variant)
           setMessage("")
-          setVariant("notice")
+          setVariant(VARIANT_OPTIONS[0])
         }}>
 
           <div className={styles.row}>
@@ -39,7 +38,11 @@ function ToastPlayground() {
               Message
             </label>
             <div className={styles.inputWrapper}>
-              <textarea id="message" className={styles.messageInput} value={message} onChange={(event) => setMessage(event.target.value)} />
+              <textarea 
+                id="message" 
+                className={styles.messageInput} 
+                value={message} 
+                onChange={(event) => setMessage(event.target.value)} />
             </div>
           </div>
 
@@ -48,11 +51,12 @@ function ToastPlayground() {
             <div
               className={`${styles.inputWrapper} ${styles.radioWrapper}`}
             >
-              {VARIANT_OPTIONS.map((option, index) => {
+              {VARIANT_OPTIONS.map((option) => {
+                const id = `variant-${option}`
                 return (
-                  <label key={index} htmlFor={`variant-${option}`}>
+                  <label key={id} htmlFor={id}>
                     <input
-                      id={`variant-${option}`}
+                      id={id}
                       type="radio"
                       name="variant"
                       value={option}

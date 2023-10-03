@@ -43,4 +43,4 @@ function Toast({toast}) {
   )
 }
 
-export default React.memo(Toast);
+export default Toast;

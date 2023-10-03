@@ -14,7 +14,7 @@ function ToastShelf() {
         aria-label="Notification">
       {toasts.map((toast) => {
         return (
-          <li className={styles.toastWrapper} key={Math.random()}>
+          <li className={styles.toastWrapper} key={toast.id}>
             <Toast toast={toast} />
           </li>
         )
@@ -23,4 +23,4 @@ function ToastShelf() {
   );
 }
 
-export default React.memo(ToastShelf);
+export default ToastShelf;
